@@ -12,7 +12,7 @@
 
     <groupId>nl.kristalsoftware.ddd.base_modules</groupId>
     <artifactId>domain-base</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>domain-base</name>
     <description>Base classes for domain modules</description>
 

@@ -23,6 +23,10 @@ public abstract class TinyDateType extends TinyType<LocalDate> {
 		return getValue() == null;
 	}
 
+	public Instant getInstant() {
+		return getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+	}
+
 	public long getDateInMillis() {
 		return getEpochMilliFromLocalDate(getValue());
 	}
@@ -31,8 +35,16 @@ public abstract class TinyDateType extends TinyType<LocalDate> {
 		return localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	}
 
+	public static Instant getInstantFromMillis(Long date) {
+		return Instant.ofEpochMilli(date);
+	}
+
 	public static LocalDate getLocalDateFromMillis(Long date) {
 		Instant instant = Instant.ofEpochMilli(date);
+		return LocalDate.ofInstant(instant, ZoneId.systemDefault());
+	}
+
+	public static LocalDate getLocalDateFromInstant(Instant instant) {
 		return LocalDate.ofInstant(instant, ZoneId.systemDefault());
 	}
 

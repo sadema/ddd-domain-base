@@ -12,11 +12,13 @@ import java.time.ZoneId;
 @Getter
 @DomainEntity
 @RequiredArgsConstructor
-public class BaseAggregateRoot<R,T> {
+public class BaseAggregateRoot<R,T> implements Aggregate {
 
     private final R reference;
 
     private final ApplicationEventPublisher eventPublisher;
+
+    private Integer numberOfEvents;
 
     protected void sendEvent(T event) {
         eventPublisher.publishEvent(event);
@@ -29,6 +31,19 @@ public class BaseAggregateRoot<R,T> {
     public LocalDate getLocalDateFromMillis(Long date) {
         Instant instant = Instant.ofEpochMilli(date);
         return LocalDate.ofInstant(instant, ZoneId.systemDefault());
+    }
+
+    @Override
+    public void setNumberOfEntities(int size) {
+        numberOfEvents = size;
+    }
+
+    public boolean exists() {
+        return numberOfEvents > 0;
+    }
+
+    public boolean notExists() {
+        return !exists();
     }
 
 }

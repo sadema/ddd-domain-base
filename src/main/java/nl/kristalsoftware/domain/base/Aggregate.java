@@ -6,4 +6,6 @@ public interface Aggregate {
 
     UUID getReferenceValue();
 
+    void setNumberOfEntities(int size);
+
 }

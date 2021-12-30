@@ -1,11 +1,9 @@
 package nl.kristalsoftware.domain.base;
 
-import java.util.UUID;
+public interface Aggregate<R> {
 
-public interface Aggregate {
+    R getReference();
 
-    UUID getReferenceValue();
-
-    void setNumberOfEntities(int size);
+    void setNumberOfEvents(int size);
 
 }

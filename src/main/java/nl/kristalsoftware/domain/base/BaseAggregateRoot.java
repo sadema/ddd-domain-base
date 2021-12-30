@@ -8,12 +8,11 @@ import org.springframework.context.ApplicationEventPublisher;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.UUID;
 
 @Getter
 @DomainEntity
 @RequiredArgsConstructor
-public class BaseAggregateRoot<R extends TinyUUIDType,T> implements Aggregate {
+public class BaseAggregateRoot<R extends TinyType<?>,T> implements Aggregate<R> {
 
     private final R reference;
 
@@ -35,12 +34,12 @@ public class BaseAggregateRoot<R extends TinyUUIDType,T> implements Aggregate {
     }
 
     @Override
-    public UUID getReferenceValue() {
-        return reference.getValue();
+    public R getReference() {
+        return reference;
     }
 
     @Override
-    public void setNumberOfEntities(int size) {
+    public void setNumberOfEvents(int size) {
         numberOfEvents = size;
     }
 

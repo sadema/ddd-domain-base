@@ -1,7 +1,9 @@
 package nl.kristalsoftware.domain.base;
 
-public interface Aggregate {
+public interface Aggregate<R> {
 
-    void setNumberOfEntities(int size);
+    R getReference();
+
+    void setNumberOfEvents(int size);
 
 }

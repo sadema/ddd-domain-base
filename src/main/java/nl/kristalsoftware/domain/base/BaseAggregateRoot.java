@@ -12,7 +12,7 @@ import java.time.ZoneId;
 @Getter
 @DomainEntity
 @RequiredArgsConstructor
-public class BaseAggregateRoot<R,T> implements Aggregate {
+public class BaseAggregateRoot<R extends TinyType<?>,T> implements Aggregate<R> {
 
     private final R reference;
 
@@ -34,7 +34,12 @@ public class BaseAggregateRoot<R,T> implements Aggregate {
     }
 
     @Override
-    public void setNumberOfEntities(int size) {
+    public R getReference() {
+        return reference;
+    }
+
+    @Override
+    public void setNumberOfEvents(int size) {
         numberOfEvents = size;
     }
 
